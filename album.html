@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./assets/dist/css/style.min.css" />
+    <link rel="stylesheet" href="./assets/css/circular-font.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.min.css" />
+    <title>Album</title>
+  </head>
+  <body>
+    <div class="container-fluid p-0">
+      <div class="d-flex">
+        <!--Navbar-->
+        <div class="bg-black flex-shrink-0" id="navbarContainer">
+          <nav class="navbar navbar-expand-lg">
+            <div
+              class="container-fluid flex-column align-items-start border border-1 border-dark border-top-0 border-end-0 border-start-0 px-2 pb-3"
+            >
+              <div class="navbar-collapse flex-column align-items-start" id="navbarNav">
+                <ul class="navbar-nav flex-column mb-3">
+                  <li class="nav-item dropdown">
+                    <a
+                      class="nav-link fs-5 text-white-50 pt-3 pb-0"
+                      href="#"
+                      role="button"
+                      data-bs-toggle="dropdown"
+                      aria-expanded="false"
+                    >
+                      <i class="bi bi-three-dots"></i>
+                    </a>
+                    <ul class="dropdown-menu bg-secondary">
+                      <li><a class="dropdown-item" href="#">File</a></li>
+                      <li><a class="dropdown-item" href="#">Robe</a></li>
+                      <li><a class="dropdown-item" href="#">Pippo</a></li>
+                    </ul>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link text-white-50 fw-semibold active" aria-current="page" href="index.html"
+                      ><i class="bi fs-5 bi-house-door-fill me-1"></i><span>Home</span></a
+                    >
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link text-white-50 fw-semibold" href="search.html"
+                      ><i class="bi fs-5 bi-search me-1"></i><span>Cerca</span></a
+                    >
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link text-white-50 fw-semibold" href="#"
+                      ><i class="bi fs-5 bi-collection me-1"></i><span>La tua libreria</span></a
+                    >
+                  </li>
+                </ul>
+
+                <ul class="navbar-nav flex-column">
+                  <li class="nav-item">
+                    <a id="createPlaylist" class="nav-link text-white-50 fw-semibold" aria-current="page" href="#">
+                      <i class="bi fs-5 bi-plus-square-fill me-1"></i><span>Crea playlist</span></a
+                    >
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link text-white-50 fw-semibold" href="album.html?albumId=liked"
+                      ><i class="bi fs-5 bi-heart-fill me-1"></i><span>Brani che ti piacciono</span>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link text-white-50 fw-semibold" href="#"
+                      ><i class="bi fs-5 bi-bookmark-fill me-1"></i><span>I tuoi episodi</span></a
+                    >
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </nav>
+          <div id="sidePlaylists" class="container-fluid overflow-x-hidden text-white-50 py-2">
+            <form id="playlistForm">
+              <input
+                id="inputForm"
+                type="text"
+                class="d-none border-0 rounded-pill bg-spotify-gray text-white w-100 px-2 py-1 mb-2"
+              />
+            </form>
+            <p>Playlist1</p>
+            <p>Salve salvino vicino</p>
+            <p>Pipplaylist</p>
+            <p>Playlist incredibile per persone incredibili</p>
+          </div>
+        </div>
+        <!--Main-->
+        <main class="flex-grow-1 spotify-bg text-white overflow-x-hidden">
+          <div id="coverBackAlbum" class="px-4 py-2">
+            <div id="btn_acc" class="d-flex justify-content-between mt-3 mb-3">
+              <div id="btns" class="d-flex">
+                <button
+                  onclick="history.back()"
+                  class="btn btn-black opacity-75 rounded-circle text-white me-2 px-2 py-0"
+                >
+                  <i class="bi bi-chevron-compact-left"></i>
+                </button>
+                <button
+                  onclick="history.forward()"
+                  class="btn btn-black opacity-75 rounded-circle text-white px-2 py-0"
+                >
+                  <i class="bi bi-chevron-compact-right"></i>
+                </button>
+              </div>
+              <div id="acc">
+                <div class="dropdown">
+                  <button
+                    class="btn btn-dark dropdown-toggle rounded-pill"
+                    type="button"
+                    data-bs-toggle="dropdown"
+                    aria-expanded="false"
+                  >
+                    <i class="bi bi-person-circle"></i> Pippo 8
+                  </button>
+                  <ul class="dropdown-menu">
+                    <li><a class="dropdown-item" href="#">Pippo</a></li>
+                    <li><a class="dropdown-item" href="#">Goofy</a></li>
+                    <li><a class="dropdown-item" href="#">Something else here</a></li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+            <!------>
+            <button id="showBtn" class="btn btn-black rounded-end-0 position-fixed custom-fixed d-none">
+              <i class="bi bi-chevron-compact-left text-white-50"></i>
+            </button>
+            <div id="currentAlbum" class="p-3 d-flex flex-column rounded-1 mb-3">
+              <div style="width: 200px" class="me-3 flex-shrink-0">
+                <img src="" class="shadow w-100" />
+              </div>
+              <!------>
+              <div id="albumInfo" class="flex-grow-1">
+                <div id="albumHide" class="d-flex justify-content-between">
+                  <p class="text-uppercase fs-10 mt-3">Album</p>
+                </div>
+                <div id="info">
+                  <h1 class="display-2 fw-bold line-height-1"></h1>
+                  <div id="photoArt" class="d-flex mt-3 align-content-center">
+                    <div style="width: 20px" class="d-flex" id="roundedImg">
+                      <img src="./assets/imgs/main/image-16.jpg" alt="artisticon" class="w-100 rounded-circle" />
+                    </div>
+                    <p class="mx-1 fs-8 mb-0"></p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!----->
+          <div id="playAlbum" class="p-4 mb-3">
+            <div id="albumBtn" class="d-flex align-items-center mb-3">
+              <button id="btnPlay" class="btn text-spotify-green border border-0 me-3 fs-1 p-0">
+                <i class="bi bi-play-circle-fill"></i>
+              </button>
+              <div class="text-white fs-3 me-3"><i class="bi bi-heart me-1"></i></div>
+              <div class="text-white fs-3 me-3"><i class="bi bi-arrow-down-circle"></i></div>
+              <div class="text-white d-flex align-items-center fs-4 me-3">
+                <i class="bi bi-three-dots"></i>
+              </div>
+            </div>
+            <div id="albumTable">
+              <table class="w-100" cellpadding="10">
+                <thead class="border border-1 border-top-0 border-end-0 border-start-0 mb-2">
+                  <tr class="">
+                    <th>#</th>
+                    <th>Titolo</th>
+                    <th class="tabTitle">Riproduzioni</th>
+                    <th></th>
+                    <th class="tabTitle"><i class="bi bi-clock"></i></th>
+                    <th></th>
+                  </tr>
+                </thead>
+                <tbody id="song"></tbody>
+              </table>
+            </div>
+          </div>
+        </main>
+        <!--Aside-->
+        <aside id="aside" class="flex-shrink-0 bg-black text-white-50 p-2" style="width: 15%">
+          <div class="d-flex justify-content-between align-items-center px-0 py-3 mb-3">
+            <h6 class="m-0">Attività amici</h6>
+            <div class="d-flex align-items-center">
+              <i class="bi bi-person-add me-1"></i>
+              <button id="activitiesBtn" class="btn text-white-50 p-0 m-0"><i class="bi bi-x-lg"></i></button>
+            </div>
+          </div>
+
+          <div class="d-flex justify-content-between mb-2">
+            <div class="d-flex">
+              <div style="width: 30px" class="pt-1 me-2">
+                <img src="assets/imgs/main/image-2.jpg" alt="image-2" class="rounded-circle w-100" />
+              </div>
+              <div>
+                <b class="fs-7">Pietro Semeraro</b>
+                <p class="fs-10 m-0">Ho una famiglia • e un giardino</p>
+                <p class="fs-10 m-0"><i class="bi bi-disc"></i> EP III</p>
+              </div>
+            </div>
+            <div><p class="pt-1 fs-9">4 ore</p></div>
+          </div>
+          <div class="d-flex justify-content-between mb-2">
+            <div class="d-flex">
+              <div style="width: 30px" class="pt-1 me-2">
+                <img src="assets/imgs/main/image-2.jpg" alt="image-2" class="rounded-circle w-100" />
+              </div>
+              <div>
+                <b class="fs-7">Pietro Semeraro</b>
+                <p class="fs-10 m-0">Ho una famiglia • e un giardino</p>
+                <p class="fs-10 m-0"><i class="bi bi-disc"></i> EP III</p>
+              </div>
+            </div>
+            <div><p class="pt-1 fs-9">4 ore</p></div>
+          </div>
+          <div class="d-flex justify-content-between mb-2">
+            <div class="d-flex">
+              <div style="width: 30px" class="pt-1 me-2">
+                <img src="assets/imgs/main/image-2.jpg" alt="image-2" class="rounded-circle w-100" />
+              </div>
+              <div>
+                <b class="fs-7">Pietro Semeraro</b>
+                <p class="fs-10 m-0">Ho una famiglia • e un giardino</p>
+                <p class="fs-10 m-0"><i class="bi bi-disc"></i> EP III</p>
+              </div>
+            </div>
+            <div><p class="pt-1 fs-9">4 ore</p></div>
+          </div>
+        </aside>
+      </div>
+      <!--Footer-->
+      <footer class="container-fluid spotify-bg text-white mb-0 sticky-bottom">
+        <div class="row row-cols-3 px-3">
+          <div id="footer1" class="col d-flex align-items-center">
+            <div id="footerImg" class="p-2 me-3" style="width: 80px">
+              <img src="./assets/imgs/main/image-14.jpg" alt="img14" class="w-100" />
+            </div>
+            <div id="footerSong" class="me-3">
+              <p id="songTitle" class="mb-0">Canzone</p>
+              <p class="fs-8 mb-0">Autore</p>
+            </div>
+            <div id="songHeart"><i class="bi bi-heart me-1"></i></div>
+          </div>
+
+          <div id="footer2" class="col d-flex flex-column align-items-center text-center justify-content-evenly">
+            <div id="footerTwoBtn">
+              <button class="btn text-white-50 border border-0 py-0"><i class="bi bi-shuffle"></i></button>
+              <button class="btn text-white-50 border border-0 py-0"><i class="bi bi-skip-start-fill"></i></button>
+              <button id="playPauseBtn" class="btn text-white-50 border border-0 fs-2 py-0">
+                <i class="bi bi-play-circle-fill"></i>
+              </button>
+              <button class="btn text-white-50 border border-0 py-0">
+                <i class="bi bi-skip-end-fill"></i>
+              </button>
+              <button class="btn text-white-50 border border-0 py-0"><i class="bi bi-repeat"></i></button>
+            </div>
+            <div class="audio-container">
+              <audio id="audioPlayer" src=""></audio>
+              <div class="progress-container">
+                <div class="progress-bar" id="progressBar"></div>
+              </div>
+            </div>
+          </div>
+
+          <div id="footer3" class="col d-flex justify-content-end align-items-center">
+            <button class="btn text-white-50 border border-0 p-0 me-2"><i class="bi bi-mic"></i></button>
+            <button class="btn text-white-50 border border-0 p-0 me-2"><i class="bi bi-view-list"></i></button>
+            <button class="btn text-white-50 border border-0 p-0 me-1"><i class="bi bi-pc-display"></i></button>
+            <label class="fs-3 text-white-50" for="volume"><i class="bi bi-volume-down"></i></label>
+
+            <input type="range" min="0" max="1" step="0.1" value="0.5" class="slider" id="myRange" />
+          </div>
+        </div>
+        <!--navbottom MOBILE-->
+        <div id="navbarMobile" class="bg-black d-flex justify-content-center">
+          <nav class="navbar w-100 navbar-expand">
+            <div
+              class="container-fluid w-100 align-items-start border border-1 border-dark border-top-0 border-end-0 border-start-0 px-2"
+            >
+              <ul class="navbar-nav w-100 d-flex justify-content-around mb-0">
+                <li class="nav-item">
+                  <a class="mx-2 nav-link text-white-50 fw-semibold active" aria-current="page" href="index.html"
+                    ><i class="bi bi-house-door-fill me-1"></i> <span>Home</span></a
+                  >
+                </li>
+                <li class="nav-item">
+                  <a class="mx-2 nav-link text-white-50 fw-semibold" href="search.html"
+                    ><i class="bi bi-search me-1"></i> <span>Cerca</span></a
+                  >
+                </li>
+                <li class="nav-item">
+                  <a class="mx-2 nav-link text-white-50 fw-semibold" href="#"
+                    ><i class="bi bi-collection me-1"></i> <span>La tua libreria</span></a
+                  >
+                </li>
+              </ul>
+            </div>
+          </nav>
+        </div>
+      </footer>
+      <!--Link js-->
+    </div>
+
+    <script
+      src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+      integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"
+      integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+"
+      crossorigin="anonymous"
+    ></script>
+    <script src="./assets/js/functionalities.js"></script>
+    <script src="./assets/js/likes.js"></script>
+    <script src="./assets/js/player.js"></script>
+    <script src="./assets/js/token.js"></script>
+    <script src="./assets/js/activities.js"></script>
+    <script src="./assets/js/album.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/color-thief/2.3.0/color-thief.umd.js"></script>
+    <script></script>
+  </body>
+</html>
